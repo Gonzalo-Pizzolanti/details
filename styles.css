@@ -1,0 +1,49 @@
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    --padding-sm: .5rem;
+    --padding-md: 1rem;
+}
+
+
+@supports (interpolate-size: allow-keywords) {
+
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
+    details {
+        padding: var(--padding-sm);
+        height: 50px;
+        max-width: calc(50% + 1rem);
+
+        transition: height 500ms ease;
+
+        &[open]::details-content {
+            height: calc-size(fit-content, size + 100px);
+            overflow: clip;
+
+            padding-inline: 1rem;
+            padding-block-start: 1rem;
+        }
+
+        &[open] {
+            height: auto;
+            overflow: clip;
+        }
+
+        &::details-content {
+            transition: all 500ms ease, content-visibility 500ms ease allow-discrete;
+            height: 0;
+            overflow: clip;
+        }
+    }
+
+    [name="detalles"] summary {
+        transition: all 500ms ease;
+    }
+
+    [name="detalles"][open] summary {
+        padding-block: .5rem;
+    }
+
+}
